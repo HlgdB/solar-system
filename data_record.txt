@@ -1,0 +1,23 @@
+8大行星 中英对照
+Mercury水星
+Venus金星
+Earth地球
+Mars火星
+Jupiter木星
+Saturn土星
+Uranus天王星
+Neptune海王星
+
+
+星球         公转周期(相对值)      轨道大小     星球大小 
+mercury     2.89016s            32em        1.5em
+venus       7.38237s            40em        3.72em
+earth       12.00021s           56em        3.92em
+mars        22.57017s           72em        2.9em
+jupiter     142.35138s          100em       12em
+saturn      353.36998s          150em       10.8em
+uranus      1008.20215s         186em       4.68em
+neptune     1977.49582s         210em       4.9em
+sun                                         24em
+
+创建一个行星object，其他行星由此继承
