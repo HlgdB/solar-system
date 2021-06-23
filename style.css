@@ -1,3 +1,30 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0; }
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
 * {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -20,25 +47,26 @@ body {
     background-position: center 40%;
     background-repeat: no-repeat;
     background-size: cover; 
+    background-color: black;
 }
 
 #galaxy {
     position: relative;
     width: 100%;
     height: 100%;
-    /*perspective: 4000;*/ 
 }
 
 #solar-system {
-    background-color: #08090A;
+    /* 大坑！！！不要设置bgcolor */
+    /* background-color: #fff; */
     position: absolute;
     width: 100%;
     height: 100%;
     transform-style: preserve-3d;
     /* 把父级容器设置了transform去控制3d旋转后，内部的子组件都会跟着旋转的 */
-    /* transform: rotateX(75deg); */
-
-    font-size: 26%;
+    transform: rotateX(75deg);
+    font-size: 62%;
+    /* opacity: 0; */
 }
 
 /* 行星轨迹通用属性放到orbit里面 */
@@ -70,6 +98,7 @@ body {
     width: 32em;
     margin-top: -16em;
     margin-left: -16em;
+    z-index: 10;
 }
 
 .orbit#venus {
@@ -77,6 +106,7 @@ body {
     width: 40em;
     margin-top: -20em;
     margin-left: -20em;
+    z-index: 9;
 }
 
 .orbit#earth {
@@ -85,6 +115,7 @@ body {
     /* 经典居中 */
     margin-top: -28em;
     margin-left: -28em;
+    z-index: 8;
 }
 
 .orbit#mars {
@@ -92,6 +123,7 @@ body {
     width: 72em;
     margin-top: -36em;
     margin-left: -36em;
+    z-index: 6;
 }
 
 .orbit#jupiter {
@@ -99,6 +131,7 @@ body {
     width: 100em;
     margin-top: -50em;
     margin-left: -50em;
+    z-index: 5;
 }
 
 .orbit#saturn {
@@ -106,6 +139,41 @@ body {
     width: 150em;
     margin-top: -75em;
     margin-left: -75em;
+    z-index: 4;
+}
+
+/* 土星环 */
+.ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: rotateX(-90deg);
+}
+
+#saturn .ring {
+    width: 2em;
+    height: 2em;
+    margin-top: -1em;
+    margin-left: -1em;
+    border: 0.3em solid rgba(160, 147, 130, 0.7);
+    animation-iteration-count: infinite;
+    animation-timing-function: linear; 
+}
+
+#saturn .ring:after {
+    border-radius: 50%;
+    position: absolute;
+    content: '';
+    top: 50%;
+    left: 50%;
+    width: 2.2em;
+    height: 2.2em;
+    margin-top: -1.1em;
+    margin-left: -1.1em;
+    border: 0.07em solid rgba(160, 147, 130, 0.5);
+    box-sizing: border-box;
+    box-sizing: border-box; 
 }
 
 .orbit#uranus {
@@ -113,6 +181,7 @@ body {
     width: 186em;
     margin-top: -93em;
     margin-left: -93em;
+    z-index: 3;
 }
 
 .orbit#neptune {
@@ -120,6 +189,7 @@ body {
     width: 210em;
     margin-left: -105em;
     margin-top: -105em;
+    z-index: 2;
 }
 
 .pos {
@@ -130,12 +200,22 @@ body {
     margin-top: -1em;
     margin-left: -1em;
     transform-style: preserve-3d;
-    /* animation-name: invert; */
+    animation-name: invert;
     animation-iteration-count: infinite;
     animation-timing-function: linear; 
 }
 
-#sun, .planet, #earth .moon {
+@keyframes invert {
+    0% {
+        transform: rotateX(-90deg) rotateY(360deg) rotateZ(0deg); 
+    }
+
+    100% {
+        transform: rotateX(-90deg) rotateY(0deg) rotateZ(0deg); 
+    } 
+}
+
+#sun, .planet {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -144,10 +224,12 @@ body {
     margin-top: -0.5em;
     margin-left: -0.5em;
     border-radius: 50%;
-    transform-style: preserve-3d; 
+    transform-style: preserve-3d;
 }
 
 #sun {
+    z-index: 1;
+    transform: rotateX(-90deg);
     background-color: #FB7209;
     background-repeat: no-repeat;
     background-size: cover;
@@ -159,7 +241,8 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     animation-iteration-count: infinite;
-    animation-timing-function: linear; 
+    animation-timing-function: linear;
+    transform: rotateX(0deg);
 }
 
 #mercury .planet {
